@@ -1,0 +1,155 @@
+# What is Computer Network?
+
+Computer network is collection of two or more interconnected computers, either through wired cables or wireless network like Wi-Fi. It involves utilization of Hardware components such as routers, switches, Hubs, access points and cables, as well as Software components such as Operating system and business application.
+
+# Types of Computer Network
+
+1. LAN (Local Area Network) – Connection between devices limited to geographical area using physical cable and hub/Switch e.g. office building, school campus etc.
+
+2. WLAN (Wireless Local Area Network) – Connection between devices in specific area using Wireless technology like Wi-Fi e.g. Home/Office Wi-Fi network.
+
+3. WAN (Wide Area Network) – Connection across large geographical areas, ranging from regional to continental scales. Internet is an example of WAN. E.g. Bank/ ATM machines
+
+4. MAN (Metropolitan Area Network) – Managed by cities and government agencies e.g Telephone company network
+
+5. PAN (Personal Area Network) – It is designed for single individual. Sharing content between two devices e.g Connection between Bluetooth earphone and smartphone
+
+6. SAN (Storage Area Network) – It is block-level storage either network based or cloud based and appears to user as storage drive e.g fiber Channel (FC), Ethernet etc.
+
+7. CAN (Campus Area Network) – They are designed for locations like colleges, universities and business campuses
+
+8. VPN (Virtual Private Network) – It is secure and direct connection between two computers.
+
+# Basic terminologies of Computer Networks
+
+1. Network - A network is a group of computers and devices linked together to facilitate communication and the exchange of data.
+
+2. Nodes -Nodes are individual devices interconnected within a network. These devices can vary and may include computers, servers, printers, routers, switches, and other similar equipment.
+
+3. Ports - A port is how a computer can use a single physical network connection to handle many incoming and outgoing requests by assigning a port number to each. The numbers go from 0 to 65535, which is a 16-bit number.
+
+4. Protocol - A protocol refers to a set of rules and standards that dictate the way data is transmitted and communicated over a network. It establishes a common language that devices within the network can understand and follow. E.g. TCP/IP, HTTP, FTP etc.
+
+5. Topology – How nodes are physically and logically organized within network e.g. star, bus, mesh and tree. These topologies determine how devices are connected and communicate with one another within the network.
+
+6. Service provider networks – This allow individual to lease or rent network from provider without owning the infrastructure.
+
+7. IP address – It serves as unique identifier user for identification of devices. It is label given to each device.
+
+8. IP Subnetting , CIDR - The process of dividing a network into smaller network sections is called subnetting. By default each network has only one subnet. More content can be found on this link.
+
+  https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking
+
+  A system called Classless Inter-Domain Routing, or CIDR, was developed as an alternative to traditional subletting. The idea is that you can add a specification in the IP address itself as to the number of significant bits that make up the routing or networking portion.
+
+9. Routing – Routing is path which transfers packet of information from a host on one network to a host in another. We use route tables to determine the routes we want to take.
+
+10. HTTP/HTTPS – Hypertext transfer protocol allows to interact with web pages, HTML documents and APIs. Communication between client computers and web servers is done by sending HTTP Requests and receiving HTTP Responses. 7 main HTTP requests(GET,HEAD,PUT,POST, DELETE,PATCH,OPTIONS) and 4 categories of responses are(200,300,400,500).HTTPS is secure protocol.
+
+11. DHCP - Automatically assigns IP address to devices.
+
+12. DNS (Domain name system) – it is used to convert domain name to IP addresses. User can access resources easily using domain names.
+
+13. Firewall - A firewall is a security mechanism that supervises incoming and outgoing network traffic to protect against unauthorized access and security threats.
+
+14. Routers - facilitate data exchange between different networks
+
+15. Switches - virtual or physical devices that connect devices within a network and manage communication between nodes.
+
+16. Load balancers - Distributes network traffic across servers.
+
+17. OSI Model -Open Systems Interconnection (OSI), is a reference model that defines communication protocol standards and functionalities of each layer.
+
+# What is TCP/IP, and how is it different from OSI?
+
+  TCP/IP combines the three top levels of OSI (Application, Presentation, and Session) into a single Application layer in TCP. The two bottommost layers of OSI (Data Link and Physical) become the Network Interface layer in TCP.
+ 
+
+# Computer Network Architecture
+
+  It is responsible for creating the framework of a computer network, considering both its physical and logical aspects.
+
+# Types of architecture:
+
+  Client-Server Architecture – In this architecture nodes can function as Client/Server, where Server node is responsible for managing and controlling Client.
+
+  Peer to Peer Architecture – In this architecture each node act as Client/Server, there is no central server.
+
+# Network troubleshooting tools
+
+1. Ping – it is integrated in all versions of windows.
+
+   Ping “www.google.com”
+
+2. traceroute – shows possible routes across IP network and calculate transit delays.
+
+  traceroute nis.nsf.net(Linux)
+
+  Tracert www.google.com (Windows)
+
+  It returns following information:
+
+  Time to live
+
+  Ip Address of each stop in route
+
+  Round trip time of each route
+
+
+3. telnet – We will be able to test whether or not the protocol you’re using will allow you to establish a network connection.
+
+  telnet google.com 443
+
+4. curl – It is used to send Http request to resources on server.
+
+  curl http://example.com
+
+  Flags used with curl command
+
+  –I : Only want to see response headers
+
+  –X POST : send Http post request
+
+  –o : write output of command to file
+
+5. dig(Domain information grapher) –It is used for troubleshooting DNS problems and records.
+
+  dig google.com
+
+  It returns information:
+  
+  The queried server
+
+  TTL
+
+  Query class
+
+  Query type
+
+  IP address
+
+6. Netstat - netstat is a command that shows you specific information about the communications between your local machine and other machines/devices on the network. Netstat shows active TCP connections as well as ports on which the server is listening. It is useful when you need to see which network services are running on a local machine.
+
+  netstat –lp
+
+  -a: all active ports
+
+  -n: only numerical IP addresses and ports
+
+  -f: whenever possible, provide all names of foreign connections
+
+  -o: show process ID
+
+  -r: routing table
+
+7. nmap(Network mapper) - nmap sends raw IP packets to determine the hosts available on a given network, what services are offered by these hosts, and what operating systems they are running.
+
+  nmap –sn 192.168.56.1
+
+8. ssh(Secure socket shell) - It’s a network protocol that allows you to log into remote machines and execute commands on them. SSH makes this process safer by encrypting all data, allowing secure communications via an untrusted network.
+
+  ssh dell@192.168.56.1
+
+  scp(Secure copy protocol) - SCP is a similarly secure way to execute actions between a local and remote host, but instead of connecting to a server and executing commands, it transfers files.
+
+  scp -i D:/linux.pem D:/EDrive/messages.txt ec2-user@13.232.89.41:/home/cloud_user/messages.txt
