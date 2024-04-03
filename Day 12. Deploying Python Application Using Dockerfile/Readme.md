@@ -32,6 +32,28 @@ Build a Docker image using a base Python 3 Linux image from Docker Hub (http://h
 
 Configure the Docker image to include your Python web application and its dependencies.
 
-Successfully run a Docker container based on the created image.
+## How to run application?
 
-Gain hands-on experience with Docker and containerization concepts.
+Docker build
+```
+docker build -t ashvini34/python-flask-web-app .
+```
+
+Docker Images
+
+```
+#list docker images and copy image id
+docker images
+```
+
+Docker run
+```
+docker run -d -p 8085:8085 <image-id>
+```
+
+Its time to run application. Just run below url in browser.
+
+```
+http://localhost:8085/
+```
+
