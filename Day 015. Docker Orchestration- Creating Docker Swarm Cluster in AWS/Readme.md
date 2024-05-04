@@ -1,10 +1,10 @@
-#Docker Orchestration
+# Docker Orchestration
 
 Containerization provides an opportunity to move and scale applications to clouds and data centers. Containers effectively guarantee that those applications run the same way anywhere, allowing you to quickly and easily take advantage of all these environments. Additionally, as you scale your applications up, you need some tooling to help automate the maintenance of those applications, enable the replacement of failed containers automatically, and manage the roll-out of updates and reconfigurations of those containers during their lifecycle.
 
 Tools to manage, scale, and maintain containerized applications are called orchestrators. One of orchestration tool is Docker Swarm.
 
-##Docker Swarm
+## Docker Swarm
 
 The Docker container orchestration tool, also known as Docker Swarm, can package and run applications as containers, find existing container images from others, and deploy a container on a laptop, server or cloud (public cloud or private).Docker Swarm is a cluster of Docker hosts connected by an overlay networking for service discovery. A Docker Swarm includes one or more manager nodes and one or more worker nodes, as shown in Figure. In the Swarm mode, a Docker service is the unit of Docker containerization. Docker containers for a service created from a Manager node are deployed or scheduled across the cluster and the Swarm includes a built-in load balancing for scaling the services. The expected state for a service is declared on the manager, which then schedules the task to be run on a node. However, the worker node itself still pulls the image and starts the container.
 
@@ -30,7 +30,7 @@ Promote Worker Node as Manager Node
 
 You can promote a worker node to the manager role. This is useful when a manager node becomes unavailable or if you want to take a manager offline for maintenance. Similarly, you can demote a manager node to the worker role.
 
-##Use-case
+## Use-case
 
 Create a two-node Swarm cluster consisting of one manager node and one worker node.
 
