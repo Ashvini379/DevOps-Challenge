@@ -1,4 +1,4 @@
-Docker security principles
+# Docker security principles
 
 From the security point of view, Docker containers use the resources of the host machine but have their own runtime environment.
 
@@ -16,13 +16,13 @@ SELinux provides a system of rules that allows you to implement access controls 
 
 Secure Computing Mode (Seccomp) monitors kernel system calls
 
-Docker Security Best Practices
+# Docker Security Best Practices
 
-Docker daemon attack surface
+## Docker daemon attack surface
 
 Docker Daemon is the main process that manages the life cycle of containers and needs root privileges to run. Unfortunately, Docker daemon executes with root privileges, so it also presents an attack vector. You can refer to the official documentation at https://docs.docker.com/engine/security for more information.
 
-Security best practices
+## Security best practices
 
 One application per container using a microservice-oriented approach.
 
@@ -68,7 +68,7 @@ RUN find / -perm +6000 -type f -exec chmod a-s {} ; || true
 docker run -d --cap-drop SETGID --cap-drop SETUID
 ```
 
-Verifying images with Docker Content Trust
+### Verifying images with Docker Content Trust
 
 Docker Content Trust (DCT) provides the ability to use digital signatures for data sent to and received from remote Docker registries. These signatures allow client-side or runtime verification of the integrity and publisher of specific image tags.
 
@@ -130,11 +130,13 @@ We must limit the use of CPU and memory for each of the containers because all c
 ```
 docker run --help | grep ‘cpu\|device\|memory’
 ```
-Docker Host Security
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/6a2d303a-b361-4317-a2d6-d8b5225685a3)
+
+## Docker Host Security
 
 We will discuss kernel-enhancement features to limit system calls such as Docker daemon and AppArmor and Seccomp profiles,
 
-Docker daemon security
+### Docker daemon security
 
 Do not expose the Docker daemon socket
 
@@ -144,7 +146,7 @@ Do not enabletcpDocker daemon socket - If you are running docker daemon with -H 
 
 Do not expose /var/run/docker.sock to other containers - You should not run If your docker image with -v /var/run/docker.sock://var/run/docker.sock
 
-Auditing files and directories
+### Auditing files and directories
 
 The Linux Audit daemon(auditd) is a framework that allows auditing events on Linux systems and is configured using two files: one for the daemon itself (auditd.conf) and one for the rules used by the auditctl tool (audit.rules). These files are located in /etc/audit directory.
 
@@ -184,7 +186,7 @@ auditctl -a exit,always -F path=/etc/passwd -F perm=wa
 sudo service auditd restart
 ```
 
-Kernel Linux security and SELinux
+### Kernel Linux security and SELinux
 
 Security-Enhanced Linux (SELinux) is a Linux kernel security module that provides different security controls like access controls, integrity controls, and Role-Based Access Control (RBAC).These tools are Mandatory Access Control (MAC) tools that impose security rules in Linux to ensure that apart from the normal read-write-execute rules that apply to files and processes, more precise rules can be applied to them at the kernel level.
 
@@ -193,8 +195,10 @@ We can install it using command
 yum install selinux-policy selinux-policy-targeted
 ```
 Check status of selinux using sestatus command
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/61c5bb6b-7945-4956-95e2-efd90b5ecaaf)
 
-Apparmor and Seccomp profiles
+
+### Apparmor and Seccomp profiles
 
 Apparmor provides protection for external and internal threats, enabling system administrators to associate a secure profile with each application, which restricts that application’s capabilities.
 
@@ -203,6 +207,8 @@ AppArmor (Application Armor) is a Linux security module that protects an operati
 docker info
 docker info | grep apparmor
 ```
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/7c05d03a-da0d-43b5-9a89-30426d38513d)
+
 When you run a container, it uses the docker-default policy unless you override it with the security-opt option. For example, the following explicitly specifies the default policy:
 ```
 $ docker run --rm -it --security-opt apparmor=docker-default hello-world
@@ -238,6 +244,8 @@ seccomp Security Options: apparmor seccomp
 A container gets the default seccomp profile when you run it, unless you override this by passing the --security-opt flag to the docker run command.
 
 We can create the following file that allows us to define the system calls that we want to block. We are blocking the chmod and chown syscalls in this example.
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/39ffc422-efbc-4e35-aed4-37a10b7e9c15)
+
 
 ```
 touch profile_policy.json
@@ -300,12 +308,26 @@ docker run -it --net host --pid host --cap-add audit_control
 -v /etc:/etc --label docker_bench_security 
 docker/docker-bench-security
 ```
-Docker bench security execution
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/cf63d6e6-13eb-46ca-a73e-0589ddb50514)
+
+### Docker bench security execution
 
 Host Configuration: This section checks the security over the host Docker configuration.
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/d89acd82-375a-4733-99f9-db7d37774c7c)
+
 
 Docker daemon configuration files: This section offers recommendations about the security of the Docker daemon
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/324fa236-6aba-4906-9a87-3a62a0be2d79)
+
 
 Docker daemon configuration files: This section shows information about the configuration files used by the daemon Docker.
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/9815048c-82fe-4764-92d1-958dd7b81814)
+
+
+Daemon Docker configuration: This section shows information about the Docker daemon configuration and can detect containers that are running on the same Docker host and checking the access to each other’s network traffic.
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/174c4874-9f03-4259-b68e-3c3154ccb56f)
+
+
+
 
 Daemon Docker configuration: This section shows information about the Docker daemon configuration and can detect containers that are running on the same Docker host and checking the access to each other’s network traffic.
