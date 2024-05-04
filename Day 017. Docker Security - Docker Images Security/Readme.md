@@ -1,6 +1,6 @@
-Tools for Vulnerability Analysis
+# Tools for Vulnerability Analysis
 
-Clair
+## Clair
 
 Clair provides a JSON API that extracts all layers of the image and can be executed to inspect container images, for example, as part of continuous integration and continuous delivery process.
 
@@ -55,12 +55,15 @@ We can use the following command to analyze vulnerabilities in a Docker image, w
 ```
 CLAIR_ADDR=<clair_server> klar <Docker_image>
 ```
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/9af6ddc0-96d1-4228-b9be-c0aa4d0199b6)
 
-Anchore
+## Anchore
 
 Anchore is an open source tool that inspects, analyzes, and certifies Docker images. This analysis is done against a proprietary database (Postgres) formed by the collection of information on vulnerabilities and security problems (CVE) from operating system distributions.It also collects the same information from the logs of popular packages like Node.JS, NPM, and Ruby.
 
 Anchore can download any image from a registry compatible with Docker V2. And with the result of the analysis, it generates a report with the details of the image, a list of artifacts (npm, gem, Python, and Java), a list of operating system packages, the list of image files, and a list of vulnerabilities.
+
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/f738d374-c025-43b5-8da1-02cc21823e23)
 
 Anchore engine architecture consists of five components that can be implemented in a single container or in a Kubernetes cluster:
 
@@ -132,13 +135,15 @@ scan images using below command. Run this command till analysis status changes t
 docker pull django:latest
 anchore-cli --u admin --p PASSWORD image add django:latest
 ```
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/5e6e06b8-c134-4959-a1f1-f98d1080abfb)
 
 We can execute the following command to check the results of the vulnerability analysis in the django:latest image.
 ```
 docker-compose exec api anchore-cli image vuln django:latest all
 ```
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/cb49e4bd-6855-45f7-b6b9-f9d919de1667)
 
-AWS ECR(Amazon Elastic Container Registry)
+## AWS ECR(Amazon Elastic Container Registry)
 
 Amazon Elastic Container Registry (Amazon ECR) is an AWS managed container image registry service that is secure, scalable, and reliable. Amazon ECR supports private repositories with resource-based permissions using AWS IAM. This is so that specified users or Amazon EC2 instances can access your container repositories and images.
 
@@ -150,6 +155,9 @@ sudo apt-get install awscli
 Create an IAM User
 
 Create an IAM user, assignAdministratorAccess, Create and download access key.csvfile.
+
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/86660454-61de-402a-90ce-7b92664655e8)
+
 
 Configure AWS CLI on your machine
 
@@ -164,13 +172,19 @@ Create an ECR repository
 
 Create AWS ECR repository with ScanOnPush option enabled using AWS Management Console.
 
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/a4a6e69f-e20d-4f18-b059-c6ae4d5d817b)
+
+
 Build docker image using AWS ECR
 
 In AWS Management Console ,Go to Created ECR repository and select View Push Commands .Follow instructions and commands.
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/df7766ef-de2d-4f58-bd40-2aaa6c4c19e7)
 
 After pushing image to ECR , you can see scanning and vulnerabilities using AWS Management Console.
 
-Trivy
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/097f39ba-22bb-42e1-b118-82d61d717263)
+
+## Trivy
 
 Trivy https://github.com/aquasecurity/trivy is an open source tool that focuses on detecting vulnerabilities in packages at the operating system level and dependency files of different languages. Trivy provides installers for most Linux and macOS systems. We can use the following commands to install Trivy in a Debian based distribution. Read more https://aquasecurity.github.io/trivy/v0.18.3/quickstart/
 
@@ -187,6 +201,7 @@ Once installed, we can see the options it offers with the -h option:
 ```
 trivy -h
 ```
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/a1b9a034-25df-458f-8fb0-73ec040bdced)
 
 Scan image using trivy
 
@@ -194,11 +209,15 @@ When analyzing the image, we see the vulnerabilities that have been detected and
 
 trivy image ubuntu:18.04
 
-Dagda
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/ce789685-fb28-4f87-a5f0-535eba054044)
+
+## Dagda
 
 Dagda is a tool to perform static analysis of known vulnerabilities, trojans, viruses, malware & other malicious threats in docker images/containers and to monitor the docker daemon and running docker containers for detecting anomalous activities.
 
 The project can be found in the GitHub repository at https://github.com/eliasgranderubio/dagda.
+
+![image](https://github.com/Ashvini379/DevOps-Challenge/assets/44570192/57dbf865-83e7-487c-afbf-de8c40306d64)
 
 ```
 git clone https://github.com/eliasgranderubio/dagda.git
