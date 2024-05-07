@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                cd 'Day 019. Continuous Integration With Jenkins'
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
