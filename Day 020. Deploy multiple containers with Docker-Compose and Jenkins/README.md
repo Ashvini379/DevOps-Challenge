@@ -1,4 +1,4 @@
-#Create a freestyle project for building and running multiple containers
+# Create a freestyle project for building and running multiple containers
 We will create a freestyle project for building and running multiple containers.
 
 The docker-compose file defines two services: a django web application and a database. The web application is the same as we used in docker-compose task. The database is a PostgreSQL server that stores some data for the web application.
