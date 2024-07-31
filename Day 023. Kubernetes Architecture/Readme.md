@@ -46,17 +46,17 @@ The ETCD Datastore stores information regarding the cluster such as Nodes, PODS,
 Every information you see when you run the kubectl get command is from the ETCD Server.
 
 Setup - Manual
-
+```
 wget -q --https-only "https://github.com/etcd-io/etcd/releases/download/v3.3.11/etcd-v3.3.11-linux-amd64.tar.gz"
-
+```
 ![image](https://github.com/user-attachments/assets/56203a85-9f73-406c-8a2a-7888a3efecdf)
 
 Setup - Kubeadm
 
 If you setup your cluster using kubeadm then kubeadm will deploy etcd server for you as a pod in kube-system namespace.
-
+```
 $ kubectl get pods -n kube-system
-
+```
 ![image](https://github.com/user-attachments/assets/c3185b96-9f0e-491e-b69f-6ae49c501fd9)
 
 kube-apiserver
