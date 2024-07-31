@@ -5,6 +5,8 @@
 The top option on the global security configuration page is also the most high-level one—meaning that it encompasses the most related functionality. Without the “Enable security” option checked, security-checking operations are not enabled. With this option turned on, security can be configured along two dimensions—authentication and authorization.
 
 Authentication here refers to how users can identify themselves to the system, such as by user ID and password. This is now called “Security Realm” in Jenkins. Authorization refers to what permissions authorized users have. These two orthogonal dimensions can, together, implement nearly any desired security policy
+![image](https://github.com/user-attachments/assets/861ad34e-1fc3-4a0a-9c86-5989775b0535)
+
 
 ## Access Control
 
@@ -43,10 +45,12 @@ The rows of the matrix each represent a user or group. There are two default gro
 Granting a particular permission to a user or group is just a matter of clicking in the box that corresponds to the appropriate row for the user/group and the column for the specific permission. Removing a permission involves just clicking again to clear the checkbox.
 
 At the end of each row are boxes you can click on to grant all permissions or remove all permissions for that user/group.
+![image](https://github.com/user-attachments/assets/b2c2e308-b345-4281-87cc-8982395f292d)
 
 Project-based matrix authorization strategy. This option is an extension to the “Matrix based security” model described in the preceding section. When selected, this adds a similar matrix to each project’s configuration page. This allows for configuration by user/group per project, so you can restrict access to some projects while allowing it for others.
 
 More specifically, when this option is set in the global security page, each project’s configuration page will have an “Enable project-based security” option in the General configuration section.
+![image](https://github.com/user-attachments/assets/333f6b55-2e5e-440a-a809-c4385975f6ba)
 
 ## Controller Isolation
 
@@ -63,14 +67,17 @@ They all have some control over commands executed during a build.
 To ensure the stability of the Jenkins controller, builds should be executed on other nodes than the built-in node. This concept is called distributed builds in Jenkins.
 
 To prevent builds from running on the built-in node directly, navigate to Manage Jenkins » Nodes and Clouds. Select Built-In Node in the list, then select Configure in the menu. Set the number of executors to 0 and save. Make sure to also set up clouds or build agents to run builds on, otherwise builds won’t be able to start.
+![image](https://github.com/user-attachments/assets/29225909-20f2-47c6-aa46-2b60306dad8b)
 
 Alternatively, use a plugin such as Job Restrictions Plugin to limit which jobs can be run on certain nodes (like the built-in node), independent of what your less trusted users may use as label expression in their jobs' configurations.
+![image](https://github.com/user-attachments/assets/ca8a7820-2983-47d1-8d5f-deec676f1599)
 
 ## Agent → Controller Access Control
 
 The Jenkins controller and agents can be thought of as a distributed process which executes across multiple discrete processes and machines. This allows an agent to ask the controller process for information available to it, for example, the contents of files, etc., and even to have the controller run certain commands when requested by the agent.
 
 So while not building on the built-in node is a good general practice to protect from bugs and less sophisticated attackers, an agent process taken over by a malicious user would still be able to obtain data or execute commands on the Jenkins controller. To prevent this, the Agent → Controller Access Control system prevents agent processes from being able to send malicious commands to the Jenkins controller.
+![image](https://github.com/user-attachments/assets/7bd0aa5b-b3da-4ac6-990d-b517e086e5fa)
 
 ## CSRF Protection
 
@@ -78,7 +85,10 @@ Cross-Site Request Forgery(CSRF or XSRF) is a type of security vulnerability in 
 
 ## CSRF Protection in Jenkins
 
-CSRF protection uses a token (called crumb in Jenkins) that is created by Jenkins and sent to the user. Any form submissions or similar action resulting in modifications, like triggering builds or changing configuration, requires that the crumb be provided. The crumb contains information identifying the user it was created for, so submissions with another user’s token would be rejected. All of this happens in the background and has no visible impact except in rare circumstances, e.g., after a user’s session expired and they logged in again.
+CSRF protection uses a token (called crumb in Jenkins) that is created by Jenkins and sent to the user. Any form submissions or similar action resulting in modifications, like triggering builds or changing configuration, requires that the crumb be provided. 
+![image](https://github.com/user-attachments/assets/3b07b0e9-f3fe-4428-ade6-c3ac4e788498)
+
+The crumb contains information identifying the user it was created for, so submissions with another user’s token would be rejected. All of this happens in the background and has no visible impact except in rare circumstances, e.g., after a user’s session expired and they logged in again.
 
 ## Configuring CSRF Protection
 
@@ -135,17 +145,22 @@ The markup formatter can be configured in Manage Jenkins » Security » Markup F
 The default markup formatter Plain text renders all descriptions as entered: Unsafe HTML metacharacters like < and & are escaped, and line breaks are rendered as <br/> HTML tags.
 
 Another commonly installed markup formatter is Safe HTML, provided by the OWASP Markup Formatter Plugin. It allows the use of a basic, safe subset of HTML.
+![image](https://github.com/user-attachments/assets/b2069bb9-bd7a-4447-b2b5-87cf90a57f9d)
 
 ## Disabling SSHD
 
 If the SSH Server plugin is installed, verify that SSH is turned off by configuring "Manage Jenkins" → "Configure Global Security" → "SSH Server" → "Disable"
+![image](https://github.com/user-attachments/assets/048199ee-0a36-4ab1-864f-e3dfce303993)
 
 ## Limiting The Agent Permissions
 
 By default, build pipelines will be running with the internal SYSTEM user permissions. This gives builds the ability to run code on any node, create and delete jobs, start and cancel other builds, and more. Running builds with such permissions can cause serious security issues if, for example, Jenkins pulls malicious build pipelines from the SCM platform, which the Jenkins administrator doesn’t monitor. Here is an example for a default privileged build log showing the permissions at the second line:
+![image](https://github.com/user-attachments/assets/7637bd63-63ea-493a-b4a6-a568f29bd33b)
 
 By using Authorize Project plugin, you can configure which user, hence what permissions, will run the build. The rule of thumb would be setting the least privilege for every project. Here is an example for the build log after modifying its permissions at "Manage Jenkins" → "Configure Global Security" → "Access Control for Builds" to have the same as the user who triggered the build.
+![image](https://github.com/user-attachments/assets/d434f890-9307-4652-9bb6-79480a68a91f)
 
 ## Audit Logs
 
 Plugins like Audit Trail allow writing or sending logs to a remote server (Syslog server or Elastic Search). Enabling this feature allows investigating security incidents or creating anomaly rules to detect malicious activity and prevent breaches. After you install the plugin, you should go to "Manage Jenkins" → "Configure System" → "Audit Trail" and configure your desired logging method.
+![image](https://github.com/user-attachments/assets/b58c53fd-df44-4cde-b63a-dee6c39151f9)
