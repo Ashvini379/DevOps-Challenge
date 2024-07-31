@@ -11,8 +11,16 @@ Minimum 2 CPU cores (or 2 vCPUs).
 20 GB of free disk space on /var (or more).
 
 Custom ICMP rule for all nodes in Security Group
+![image](https://github.com/user-attachments/assets/fd87e82c-0098-4862-a443-425a1c793c0e)
+
+![image](https://github.com/user-attachments/assets/7874bafb-0352-49d8-b255-df7e7cd9fe32)
 
 Ensure machines in the cluster can ping each other via IP and hostname.
+![image](https://github.com/user-attachments/assets/1d4e5de0-af9c-4419-b59e-d3c8a67ace5e)
+
+![image](https://github.com/user-attachments/assets/6dc74925-7ee3-4e4c-9563-c79e7de5c6f3)
+
+![image](https://github.com/user-attachments/assets/2ad6f555-1198-4009-9ded-f0394a4585fb)
 
 Update and Upgrade Ubuntu (all nodes)
 
@@ -98,6 +106,9 @@ With all the prerequisites in place, initialize the Kubernetes cluster on the ma
 ```
 sudo kubeadm init
 ```
+
+![image](https://github.com/user-attachments/assets/d7dff1ac-ab9a-4336-9ef9-c6d7611b50ed)
+
 After the initialization is complete make a note of the kubeadm join command for future reference.
 
 Run the following commands on the master node:
@@ -110,25 +121,39 @@ Next, use kubectl commands to check the cluster and node status:
 ```
 kubectl get nodes
 ```
+
+![image](https://github.com/user-attachments/assets/b1f69858-8739-4ccc-8a18-4c679584b7d4)
+
 Add Worker Nodes to the Cluster (worker nodes)
 
 On each worker node, use the kubeadm join command you noted down earlier:
 
 Open port 6443 on all nodes
+![image](https://github.com/user-attachments/assets/8cc66290-74e3-4207-94ec-a7f1ce18d36f)
+
 ```
 kubeadm join 172.31.26.104:6443 --token lit28c.xikm96pa63xb1c0k \
         --discovery-token-ca-cert-hash sha256:ef3b21607fc490f882e74366d16780de35bc0b3446af82e5a02f8a0e5bb712f4
 ```
+![image](https://github.com/user-attachments/assets/72d153b1-1a28-4831-b494-ff1fa00e25a4)
+
+![image](https://github.com/user-attachments/assets/4079c40c-37a1-4feb-b330-5c51f286072f)
+
+
 list all nodes on master-node
 ```
 kubectl get nodes
 ```
+![image](https://github.com/user-attachments/assets/7cbce158-25ed-4934-a41f-fcca996a337e)
+
 Install Kubernetes Network Plugin (master node)
 
 To enable communication between pods in the cluster, you need a network plugin. Install the Calico network plugin with the following command from the master node:
 ```
 kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/calico.yaml
 ```
+![image](https://github.com/user-attachments/assets/f16e290b-488b-4c7a-8f1a-1a3851cb0f32)
+
 Verify the cluster and test (master node)
 
 Finally, we want to verify whether our cluster is successfully created.
@@ -136,7 +161,12 @@ Finally, we want to verify whether our cluster is successfully created.
 kubectl get pods -n kube-system
 kubectl get nodes
 ```
+![image](https://github.com/user-attachments/assets/5aa9d905-b93d-43b2-8fef-d91d8e77c27a)
+
 Deploy test application on cluster (master node)
 ```
 kubectl run nginx --image=nginx
+
+![image](https://github.com/user-attachments/assets/6497585f-cdbc-445d-b2b0-164c64afaef2)
+
 ```
