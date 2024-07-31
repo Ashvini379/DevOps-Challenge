@@ -27,6 +27,7 @@ Community and Support: Kubernetes has a vibrant and active open-source community
 Multi-Tenancy: Kubernetes supports multi-tenancy, allowing you to run multiple applications or teams within the same cluster while maintaining isolation and resource allocation controls.
 
 # Kubernetes Architecture
+![image](https://github.com/user-attachments/assets/090f5cd5-779f-429b-9c49-fcafbcbf0eef)
 
 Servers in a Kubernetes cluster are given two essential roles: master or node. If a server is assigned with the master role, it is expected to run centralized logical components of Kubernetes. It is possible to have more than one master server to achieve high availability, and the master servers run the Kubernetes API server, key/value store, scheduler, and controllers. These components create the brain of Kubernetes that interacts with the outside world and makes decisions based on the changes in the cluster or user demands.
 
@@ -48,11 +49,15 @@ Setup - Manual
 
 wget -q --https-only "https://github.com/etcd-io/etcd/releases/download/v3.3.11/etcd-v3.3.11-linux-amd64.tar.gz"
 
+![image](https://github.com/user-attachments/assets/56203a85-9f73-406c-8a2a-7888a3efecdf)
+
 Setup - Kubeadm
 
 If you setup your cluster using kubeadm then kubeadm will deploy etcd server for you as a pod in kube-system namespace.
 
 $ kubectl get pods -n kube-system
+
+![image](https://github.com/user-attachments/assets/c3185b96-9f0e-491e-b69f-6ae49c501fd9)
 
 kube-apiserver
 
@@ -63,8 +68,10 @@ Installing kube-apiserver
 If you are bootstrapping kube-apiserver using kubeadm tool, then you don't need to know this, but if you are setting up using the hardway then kube-apiserver is available as a binary in the kubernetes release page.
 
 For example: You can download the kube-apiserver v1.13.0 binary here kube-apiserver
-
+```
 wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-apiserver
+```
+![image](https://github.com/user-attachments/assets/b09c5773-61cc-4d11-b3f9-f3e7bc072b3d)
 
 kube-controller-manager
 
@@ -81,12 +88,15 @@ Installing Kube-Controller-Manager
 When you install kube-controller-manager the different controllers will get installed as well.
 
 Download the kube-controller-manager binary from the kubernetes release page. For example: You can download kube-controller-manager v1.13.0 here kube-controller-manager
-
+```
 $ wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-controller-manager
-
+```
 By default all controllers are enabled, but you can choose to enable specific one from kube-controller-manager.service
-
+```
 $ cat /etc/systemd/system/kube-controller-manager.service
+```
+
+![image](https://github.com/user-attachments/assets/c6631314-25d7-4389-a4e8-7374574ff625)
 
 kube-scheduler
 
@@ -97,14 +107,15 @@ The kube-scheduler is only responsible for deciding which pod goes on which node
 Install kube-scheduler - Manual
 
 Download the kubescheduler binary from the kubernetes release pages kube-scheduler. For example: To download kube-scheduler v1.13.0, Run the below command.
-
+```
 $ wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-scheduler
-
+```
 Extract it
 
 Run it as a service
 
 cloud-controller-manager
+![image](https://github.com/user-attachments/assets/dda611fb-7581-46c0-adb5-dc10848e7a2e)
 
 Cloud controller managers are the set of bridges that connect Kubernetes resources to the cloud providers. For instance, they manage the storage and networking requirements based on the cloud environment. It is possible to have portable and robust applications running in Kubernetes with the help of cloud controller managers.
 
@@ -125,12 +136,14 @@ Install kubelet
 Kubeadm does not deploy kubelet by default. You must manually download and install it.
 
 Download the kubelet binary from the kubernetes release pages kubelet. For example: To download kubelet v1.13.0, Run the below command.
-
+```
 $ wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kubelet
-
+```
 Extract it
 
 Run it as a service
+
+![image](https://github.com/user-attachments/assets/bd9a4e62-afa4-454f-ae7e-570c279c1175)
 
 kube-proxy
 
@@ -141,12 +154,13 @@ Kube-Proxy is a process that runs on each node in the kubernetes cluster.
 Install kube-proxy - Manual
 
 Download the kube-proxy binary from the kubernetes release pages kube-proxy. For example: To download kube-proxy v1.13.0, Run the below command.
-
+```
 $ wget https://storage.googleapis.com/kubernetes-release/release/v1.13.0/bin/linux/amd64/kube-proxy
-
+```
 Extract it.
 
 Run it as a service.
+![image](https://github.com/user-attachments/assets/d8d8ea90-c236-48c1-840e-e7a324355ce5)
 
 ## Difference Between kubectl and kubelet:
 
@@ -331,6 +345,7 @@ Services
 Kubernetes Services enables communication between various components within and outside of the application.
 
 Service Types
+![image](https://github.com/user-attachments/assets/e38ed038-5035-4a1b-b511-787b6db71788)
 
 NodePort
 
@@ -347,6 +362,9 @@ spec:
    port: 80
    nodePort: 30008
 ```
+
+![image](https://github.com/user-attachments/assets/3770cae8-6346-44a2-9c6a-dcbb94d5ee7b)
+
 To create the service
 ```
 $ kubectl create -f service-definition.yaml
@@ -403,3 +421,5 @@ spec:
             requests:
                 storage: 1Gi
 ```
+
+![image](https://github.com/user-attachments/assets/64529d1e-343b-4c63-83ac-b7c20f7b69ed)
